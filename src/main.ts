@@ -6,6 +6,7 @@ import express from 'express'
 
 async function bootstrap() {
   const app = await NestFactory.create(LoggerModule);
+  app.enableCors();
   await app.listen(process.env.PORT || 8080);
 }
 bootstrap();
