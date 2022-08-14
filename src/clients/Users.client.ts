@@ -5,12 +5,9 @@ import express from 'express'
 import {Log} from "../types/Log";
 import {Input} from "../types/Input";
 
-
-const uri = `mongodb+srv://${process.env.MONGO_ID}:${process.env.MONGO_PW}@${process.env.MONGO_URL}/test?retryWrites=true&w=majority`;
-
 export class Users {
     static async saveLog(log: Log) {
-        const client = new MongoClient(uri);
+        const client = new MongoClient(process.env.MONGODB_URI);
         
         try {
             const database = client.db("logs");
@@ -24,7 +21,7 @@ export class Users {
     }
 
     static async saveInput(input: Input) {
-        const client = new MongoClient(uri);
+        const client = new MongoClient(process.env.MONGODB_URI);
         
         try {
             const database = client.db("inputs");
