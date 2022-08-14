@@ -1,22 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Log } from 'src/types/Log';
-import { MongoClient } from 'mongodb';
+import {Users} from "../clients/Users.client";
+import { Input } from 'src/types/Input';
 
 @Injectable()
 export class LoggerService {
-  Users = class {
-    static async saveLog(log: Log) {
-      const uri = `mongodb+srv://${process.env.MONGO_ID}:${process.env.MONGO_PW}@${process.env.MONGO_URL}/test?retryWrites=true&w=majority`;
-      const client = new MongoClient(uri);
-      await client.connect()
-      console.log(uri);
-      client.close();
-      await client.close();
-    }
-  }
-  
   saveLog(log: Log) {
-    console.log("service");
-    let client = this.Users.saveLog(log);
+    return Users.saveLog(log);
+  }
+
+  saveInput(input: Input) {
+    return Users.saveInput(input);
   }
 }
