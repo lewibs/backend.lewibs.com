@@ -1,12 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { LoggerService } from './logger.service';
+import {Log} from "../types/Log";
 
-@Controller()
+@Controller('logger')
 export class LoggerController {
   constructor(private readonly loggerService: LoggerService) {}
 
-  @Get()
-  getHello(): string {
-    return this.loggerService.getHello();
+  @Post()
+  async storeLog(@Body() log: Log) {
+    console.log("controller");
+    return await this.loggerService.saveLog(log);
   }
 }
